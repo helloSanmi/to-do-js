@@ -1,15 +1,9 @@
-    //custom event
-    //const event = new Event('onTodoDatabaseChange');
 
     var todoInput = document.getElementById('todoInput');
     var todoButton = document.getElementById('todoBtn');
     var listContainer = document.getElementById('todoList');
     var output = document.getElementById('output');
     var todoDatabase = [];
-
-    // document.addEventListener('onTodoDatabaseChange', function(e){
-    //     display();
-    // }, false);
 
     function display(){
         listContainer.innerHTML = "";
