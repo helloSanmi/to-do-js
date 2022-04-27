@@ -1,18 +1,24 @@
-
+   //custom event
+    //const event = new Event('onTodoDatabaseChange');    
+    
     var todoInput = document.getElementById('todoInput');
     var todoButton = document.getElementById('todoBtn');
     var listContainer = document.getElementById('todoList');
     var output = document.getElementById('output');
     var todoDatabase = [];
 
+    // document.addEventListener('onTodoDatabaseChange', function(e){
+    //     display();
+    // }, false);
+
     function display(){
         listContainer.innerHTML = "";
         todoDatabase.forEach(function(val, index){
           var content =
           '<li class="list-group-item list-group-item-action text-start" aria-current="true">' +
-          "<span>" +val+ '</span>  <a href="#" onclick="removeElement(event)" id="' 
+          "<span style='text-transform: capitalize;'>" +val+ '</span>  <a href="#" onclick="removeElement(event)" id="' 
           +index+ '" class="text-end">Delete</a></li>';
-				listContainer.innerHTML += content;
+          listContainer.innerHTML += content;
         });
         todoInput.value = "";
     }
@@ -26,13 +32,15 @@
 
     function checkDuplicate(val){
       output.innerHTML = ""
-      if (todoDatabase.includes(val) === false) {
-        var message = todoDatabase.push(val);
+      var value = val.toLowerCase();
+      if (!todoDatabase.includes(value)) {
+        var mess = todoDatabase.push(value);
       }
       else{
-        var message = output.innerHTML += '<strong>Oops! Todo already added</strong>'
+        var mess = output.innerHTML += '<strong>Oops! Todo already added</strong>'
+        // output.innerHTML = ""
       }
-      return message;
+      return mess;
     }
 
     todoInput.addEventListener('keypress', function(event){
@@ -40,7 +48,9 @@
         if(value.length > 0 && event.which === 13){
             checkDuplicate(value)
             display();
+            event.preventDefault();
         }
+        
     });
 
     todoButton.addEventListener('click', function(){
@@ -49,4 +59,4 @@
           checkDuplicate(value)
             display();
         }
-    })
+    });
